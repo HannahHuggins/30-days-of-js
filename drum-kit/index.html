@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Drum Kit</title>
+    <link rel="stylesheet" type="text/css" href= "index.css">
 </head>
 <body>
     <div class= "keys">
@@ -56,12 +57,23 @@
 
 
 <script>
-    window.addEventListener("keydown", function(e){
-        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
-        if(!audio) return; // stop the function from running altogether
-        audio.play()
 
-    });
+function playSound(e){
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+    const key= document.querySelector(`.key[data-key="${e.keycode}"]`)
+    if(!audio) return; // stop the function from running altogether
+    audio.currentTime= 0; //rewind to the start so you can play multiple sounds
+    audio.play()
+    key.classList.add('playing');
+}
+function removeTransition(e){
+    if(e.propertyName !== 'transform') return; //skip if it's not transform 
+    this.classList.remove('playing');
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener("keydown", playSound);
 </script>
 </body>
 </html>
