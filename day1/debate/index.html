@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Debate!</title>
+    <link rel="stylesheet" type="text/css" href= "index.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Debate wars!</h1>
+    </div>
+
+    <div class= "keys">
+      <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="sound">Wrong.</span>
+      </div>
+        <div data-key= "83" class= key>
+            <kbd>S</kbd>
+            <span class= "sound">Fake.</span>
+       </div>    
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">Rich?</span>
+        </div>
+        <div data-key="70" class="key">
+            <kbd>F</kbd>
+            <span class="sound">STAHP.</span>
+        </div>
+        <div data-key= "71" class= "key">
+            <kbd>G</kbd>
+            <span class="sound">Grabem</span>
+        </div>
+        <div data-key="72" class= "key">
+            <kbd>H</kbd>
+            <span class="sound">Walls</span>
+        </div>
+        <div data-key= "74" class="key">
+            <kbd>J</kbd>
+            <span class="sound">Comeon</span>
+        </div>
+        <div data-key= "75" class="key">
+            <kbd>K</kbd>
+            <span class="sound">Bless</span>
+        </div>
+        <div data-key= "76" class="key">
+            <kbd>L</kbd>
+            <span class="sound">Man..</span>
+        </div>
+    </div>
+    
+
+<audio data-key= "65" src="../debate/trump/wrong_4wlZSJh.mp3"></audio><audio>
+<audio data-key= "83" src="trump/donald-trump-fake-news-sound-effect.mp3"></audio>
+<audio data-key= "68" src="trump/donald-trump-im-really-rich-sound-effect.mp3"></audio>
+<audio data-key= "70" src="trump/donald-trump.mp3"></audio>
+<audio data-key= "71" src="trump/grab-them-by-the-p__y.mp3"></audio>
+<audio data-key= "72" src="trump/i_will_build_a_great_great_wall_on_our_southern_bo.mp3"></audio>
+<audio data-key= "74" src="obama/obama_-_come_on_people.mp3"></audio>
+<audio data-key= "75" src= "obama/barack-obama.mp3"></audio>
+<audio data-key= "76" src="obama/obama_-_come_on_man.mp3"></audio>
+
+
+<script>
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+</body>
+</html>
