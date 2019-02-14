@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Brilliantte';
+    src: url(../day3/fonts/Moyko.ttf);
+}
+
+body{
+    text-align: center;
+    background: black;
+    color: white;
+    font-family: 'Brilliantte';
+    font-weight: 100;
+    font-size: 50px;
+}
+
+.controls {
+    margin-bottom: 50px;
+}
+
+:root {
+    --base: #ffc600;
+    --spacing: 10px;
+    --blur: 10px;
+}
+
+img {
+    padding:var(--spacing);
+    background:var(--base);
+    filter:blur(var(--blur));
+
+}
+
+.h1 {
+    color:var(--base);
+}
