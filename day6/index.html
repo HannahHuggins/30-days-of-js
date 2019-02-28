@@ -16,12 +16,15 @@
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
-
+//API endpoint, JSON API
 const cities = []; 
+// Empty array to store the cities in 
 
 fetch(endpoint)
    .then(blob => blob.json())
    .then(data => cities.push(...data))
+// get the endpoint of the API then add the JSON to blob and then push the cities to data (add the cities from the JSON to the empty array).
+
 
 function findMatches(wordToMatch, cities) {
     return cities.filter(place => {
@@ -30,7 +33,10 @@ function findMatches(wordToMatch, cities) {
 
     });
 }
-
+/* function with two arguements, wordToMatch and cities, return statement is filtering through the array of cities and using regex to 
+find the 'wordToMatch' the string specified in the second arguement 'gi'. 
+Then also return the city the string has matched, or (||) the state the string has matched. 
+*/
 
 
 function displayMatches() {
@@ -48,17 +54,30 @@ function displayMatches() {
     }).join('');
     suggestions.innerHTML = html; 
 }
+/* The matchArray variable is assigned to find the value of the city, the html variable is being used to map the results of
+the matchArray. Map will match the matchArray to the place we're trying to specify. 
+Regular expression to assign to the String 'gi' specified to this.value. 
+City name = replaced by the value specified
+State name = also replaced by the value specified.
+Return in a separate paragraph the city and state that matches the string specified. 
+Use the number with commas function to replace all of the commas in the population from the JSON object. 
+`` Backticks are used to specify html, so that the <span classes> can be styled.
+   */
+
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+// This will replace the number of commas in the JSON and get rid of them to make it tidier to look at 
 
 
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('change', displayMatches);
+// eventListener that is watching for a change is the matches 
 searchInput.addEventListener('keyup', displayMatches);
+// eventListener watching out for caps 
 
 </script>
 </body>
