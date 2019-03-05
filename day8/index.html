@@ -8,35 +8,58 @@
     <canvas id="draw" width="800" height="800"></canvas>
     <script>
         const canvas = document.querySelector('#draw');
+        /* The canvas element is set above with the id draw, and this variable is grabbing the id from that element and applying
+        it to the canvas variable, so that we can use that space defined. */
         const ctx = canvas.getContext('2d');
+        /* Applying the variable ctx to confirm the canvas is 2d*/
         canvas.width = window.innerWidth;
+        // Canvas is the width of the window
         canvas.height = window.innerHeight;
+        // Canvas is the height of the window
         ctx.strokeStyle = '#BADA55';
+        // Setting the color of the strokes //
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
+        ctx.lineWidth = 60;
+        let hue= 0;
+        let direction = true;
 
 
         let isDrawing = false;
         let lastX = 0;
         let lastY = 0;
+        //setting the values to be added to (when drawn the x and y values will change ) - where do we start the line, and where does it end. //
 
     function draw(e){
         if(!isDrawing) return; // stop the function from running when they are not moving the mouse down 
         console.log(e);
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
-        [lastX, lastY] = [e.offsetX, e.offsetY];
-        //destructuring 
+        ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+        ctx.beginPath(); // starting a path -// 
+        ctx.moveTo(lastX, lastY); // starting with an x and y, and - 
+        ctx.lineTo(event.offsetX, event.offsetY); // moving to an x and y. 
+        ctx.stroke(); 
+        [lastX, lastY] = [event.offsetX, event.offsetY];
+        //destructuring an array 
+        hue++;
+        if(hue >= 360){
+            hue = 0;
+        }
+        if (ctx.lineWidth >= 100 || ctx.lineWidth <=1){
+            direction = !direction;
+        }
+        if (direction){
+            ctx.lineWidth++;
+        } else{
+        ctx.lineWidth--;
     } 
-
+    }
     canvas.addEventListener('mousedown', () => {
         isDrawing = true;
-        [lastX, lastY] = [e.offsetX, e.offsetY];
+        [lastX, lastY] = [event.offsetX, event.offsetY];
     });
+    // this will draw when the mouse is clicked 
 
-    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mousemove', draw); // this will continue the drawing when the mouse is moved. 
     canvas.addEventListener('mouseup', () => isDrawing = false);
     canvas.addEventListener('mouseout', () => isDrawing = false);
     

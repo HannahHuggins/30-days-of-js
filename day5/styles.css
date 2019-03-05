@@ -3,7 +3,7 @@
     font-family: newFont;
     src: url("../day5/Takota.ttf")
 }
-
+/*Setting the font from the ttf found in the src */
 body {
     margin: 0;
 }
@@ -11,6 +11,7 @@ body {
 *, *::before, *:after{
     box-sizing: inherit;
 }
+/* * refers to everything, making sure the size of the box stays the same before and after the animation */
 
 
 .panels {
